@@ -37,12 +37,13 @@ async function Scrape() {
         fs.writeFileSync(FILEPATH, JSON.stringify(parsedContent), function (err) {
             if (err) throw err;
         })
-    
+        browser.close();
     } catch (error) {
         console.log(error);
     }
    
     console.log('file updated');
+
 }
 
 async function asyncForEach(array, callback) {
