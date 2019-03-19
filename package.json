@@ -2,13 +2,13 @@
   "name": "api.totteperera.se",
   "version": "1.0.0",
   "description": "simple api for totteperera.se",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "NaN"
+    "url": "https://github.com/Totteperera/api.totteperera.se"
   },
   "author": "Totte Perera",
   "license": "ISC",
