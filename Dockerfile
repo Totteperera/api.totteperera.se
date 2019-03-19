@@ -16,17 +16,16 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 # Add user so we don't need --no-sandbox.
-RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /home/node/app
+# RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
+RUN && mkdir -p /home/node/Downloads \
+    && chown -R node:node /home/node
 
 # It's a good idea to use dumb-init to help prevent zombie chrome processes.
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 
 # Run everything after as non-privileged user.
-USER pptruser
+# USER pptruser
 
 
 WORKDIR /home/node/app
