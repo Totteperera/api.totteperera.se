@@ -1,21 +1,28 @@
 const express = require("express");
 const Timer = require("./timer");
 const fs = require("fs");
+const https = require("https")
 const FILEPATH = __dirname + '/stocks.json';
 
 var app = express();
 
-app.all("/*", (req, res) => res.sendStatus(404))
 app.get("/", (req,res) => res.sendStatus(404))
 
 
-app.get("/url", (req, res, next) => {
+app.get("/stocks", (req, res, next) => {
     var contents = fs.readFileSync(FILEPATH,'utf8');
     res.json(contents);
 })
 
-app.listen(80, () => {
-    console.log("Server running on port 80");
+
+app.all("/*", (req, res) => res.sendStatus(404))
+
+app.listen(7010, () => {
+    console.log("Server running on port 7010");
 })
+
+// const server = https.createServer(app).listen(, () => {
+//    console.log("server: "+ server.address().port)
+//   })
 
 Timer();
