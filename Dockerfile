@@ -1,21 +1,19 @@
-FROM node:10-alpine
+FROM node:10
 
-RUN apk update && apk install -yq libgconf-2-4
-
-RUN apk add --no-cache gnupg
+RUN apt-get update && apt-get install -yq libgconf-2-4
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
 # installs, work.
 # trouble shooting from https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
-RUN apk update && apk install -y wget --no-install-recommends \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg add - \
+RUN apt-get update && apt-get install -y wget --no-install-recommends \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-    && apk update \
-    && apk install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
+    && apt-get update \
+    && apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
       --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
-    && apk purge --auto-remove -y curl \
+    && apt-get purge --auto-remove -y curl \
     && rm -rf /src/*.deb
 
 # It's a good idea to use dumb-init to help prevent zombie chrome processes.
