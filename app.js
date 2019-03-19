@@ -1,16 +1,13 @@
 const express = require("express");
 const Timer = require("./timer");
+const cors = require("cors")
 const fs = require("fs");
 const https = require("https")
 const FILEPATH = __dirname + '/stocks.json';
 
 var app = express();
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+app.use(cors())
   
 app.get("/stocks", (req, res, next) => {
     var contents = fs.readFileSync(FILEPATH,'utf8');
