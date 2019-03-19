@@ -17,7 +17,7 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 # Add user so we don't need --no-sandbox.
 # RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
-RUN && mkdir -p /home/node/Downloads \
+RUN mkdir -p /home/node/Downloads \
     && chown -R node:node /home/node
 
 # It's a good idea to use dumb-init to help prevent zombie chrome processes.
